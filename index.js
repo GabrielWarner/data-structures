@@ -1,5 +1,5 @@
 class Node {
-    conructor(val){
+    constructor(val){
         this.val = val
         this.next = null
     }
@@ -8,7 +8,7 @@ class Node {
 class SinglyLinkedList {
     constructor(){
         this.head = null
-        this.head = null
+        this.tail = null
         this.length = 0
     }
 
@@ -45,9 +45,33 @@ class SinglyLinkedList {
 
     shift(){
         if(!this.head)return undefined
-        oldHead = this.heaad
+        let oldHead = this.head
         this.head = this.head.next
-        this.length--
+        this.length--;
+        if(this.length === 0){
+            this.tail = null
+        }
         return oldHead
     }
+
+    unShift(val){
+        const newNode = new Node(val)
+        if(!this.head){
+            this.head = newNode
+            this.tail = newNode
+        }
+            newNode.next = this.head
+            this.head = newNode
+            this.length++
+            return this
+    }
 }
+
+let list = new SinglyLinkedList()
+list.push('hi')
+list.push('there')
+list.push('YOLO')
+
+
+
+console.log(list)
