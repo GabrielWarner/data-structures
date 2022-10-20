@@ -70,12 +70,39 @@ class DoublyLinkedList {
         return this
     }
     get(index){
-        
+        if(index < 0 || index >= this.length) return null
+        let counter, curr;
+        if(index <= this.length / 2){
+            counter = 0
+            curr = this.head
+            while(counter != index){
+                curr = curr.next
+                counter++
+            }
+        }else{
+            counter = this.length - 1
+            curr = this.tail
+            while(counter != index){
+                curr = curr.prev
+                counter--
+            }
+        }
+        return curr
     }
+    set(index, val){
+        const foundNode = this.get(index)
+        if(foundNode !== null){
+            foundNode.val = val
+            return true
+        }
+        return false
+    }
+
 
 }
 
 const list = new DoublyLinkedList()
 list.push("oi")
 list.push("hi")
-console.log((list))
+list.set(0, "faka")
+console.log(list)
