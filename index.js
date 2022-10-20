@@ -104,14 +104,26 @@ class SinglyLinkedList {
         this.length++
         return true
     }
+
+    remove(index){
+        if(index < 0 || index >= this.length) return undefined
+        if(index == this.length - 1) return !!this.pop(val)
+        if(index == 0) return !!this.shift()
+        let prev = this.get(index - 1)
+        let nodeToRemove = prev.next
+        prev.next = nodeToRemove.next
+        this.length--
+        return nodeToRemove
+
+    }
 }
 
 let list = new SinglyLinkedList()
 list.push('hi')
 list.push('there')
 list.push('YOLO')
-list.get(1)
-list.set(0, 'YAGA TEIA')
+list.remove(0)
+
 
 console.log(list)
 
