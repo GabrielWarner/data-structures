@@ -12,6 +12,7 @@ class SinglyLinkedList {
         this.length = 0
     }
 
+    //adds to end of list
     push(val){
         const newNode = new Node(val)
         if(!this.head){
@@ -25,6 +26,7 @@ class SinglyLinkedList {
         return this
     }
 
+    //removes from end of list
     pop(){
         if(!this.head)return undefined
         let current = this.head
@@ -43,6 +45,7 @@ class SinglyLinkedList {
         return current
     }
 
+    //remove from start of list
     shift(){
         if(!this.head)return undefined
         let oldHead = this.head
@@ -54,6 +57,7 @@ class SinglyLinkedList {
         return oldHead
     }
 
+    //add to start of list
     unShift(val){
         const newNode = new Node(val)
         if(!this.head){
@@ -65,13 +69,49 @@ class SinglyLinkedList {
             this.length++
             return this
     }
+
+    //returns value of a given index
+    get(index){
+        if(index < 0 || index >= this.length) return null
+        let counter = 0
+        let current = this.head
+        while(counter !== index){
+            current = current.next
+            counter++
+        }
+        return current
+    }
+
+    //sets value of a node at a given index
+    set(index, value){
+    let foundNode = this.get(index)
+       if(foundNode){
+        foundNode.val = value
+        return true
+       }
+       return false
+    }
+
+    insert(index, value){
+        if(index < 0 || index > this.length) return false
+        if(index == this.length) return !!this.push(value)
+        if(index == 0) return !!this.unShift(value)
+        let nodeBefore = this.get(index - 1)
+        let thirdNode = nodeBefore.next
+        let newNode = new Node(value)
+        nodeBefore.next = newNode
+        newNode.next = thirdNode
+        this.length++
+        return true
+    }
 }
 
 let list = new SinglyLinkedList()
 list.push('hi')
 list.push('there')
 list.push('YOLO')
-
-
+list.get(1)
+list.set(0, 'YAGA TEIA')
 
 console.log(list)
+
