@@ -40,9 +40,39 @@ class DoublyLinkedList {
         this.length--
         return end
     }
+    //removes from beginning
     shift(){
+        if(this.length == 0 )return undefined
+        oldHead = this.head
+        if(this.length == 1){
+            this.head = null
+            this.tail = null
+        }else{
+            this.head = oldHead.next
+            this.head.prev = null
+            oldHead.next = null
+        }
+        this.length--
+        return oldHead
+    }
+    //add to beginning
+    unshift(val){
+        const newNode = new Node(val)
+        if(this.length == 0){
+            this.head = newNode
+            this.tail = newNode
+        }else{
+            newNode.next = this.head
+            this.head.prev = newNode
+            this.head = newNode
+        }
+        this.length++
+        return this
+    }
+    get(index){
         
     }
+
 }
 
 const list = new DoublyLinkedList()
