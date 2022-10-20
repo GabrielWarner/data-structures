@@ -101,17 +101,19 @@ class DoublyLinkedList {
         if(index < 0 || index > this.length) return false
         if(index === 0) return !!this.unshift(val)
         if(index === this.length) return !!this.push(val)
+
         let newNode = new Node(val)
         let prev = this.get(index - 1)
         let third = prev.next
-        prev.next = newNode
-        newNode.prev = prev
-        newNode.next = third
-        third.perv = newNode
+
+        prev.next = newNode, newNode.prev = prev
+        newNode.next = third, third.perv = newNode
         this.length++
         return true
     }
-    
+    remove(){
+
+    }
 }
 
 const list = new DoublyLinkedList()
