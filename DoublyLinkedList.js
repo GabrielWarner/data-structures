@@ -43,7 +43,7 @@ class DoublyLinkedList {
     //removes from beginning
     shift(){
         if(this.length == 0 )return undefined
-        oldHead = this.head
+        let oldHead = this.head
         if(this.length == 1){
             this.head = null
             this.tail = null
@@ -111,13 +111,28 @@ class DoublyLinkedList {
         this.length++
         return true
     }
-    remove(){
+    remove(index){
+        if(index < 0 || index >= this.length) return undefined
+        if(index == 0) return !!this.shift()
+        if(index == this.length - 1) return !!this.pop()
 
+        let removedNode = this.get(index)
+        let prev = removedNode.prev
+        let after = removedNode.next
+        prev.next = after
+        after.prev = prev
+
+        removedNode.next = null
+        removedNode.prev = null
+        this.length--
+        return index
     }
 }
 
 const list = new DoublyLinkedList()
-list.push("oi")
-list.push("hi")
-list.set(0, "faka")
+list.push("0")
+list.push("1")
+list.push("2")
+list.insert(0, "replaced")
+list.remove(0)
 console.log(list)
